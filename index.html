@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GTA Weapons Portal</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <!-- LOGIN SCREEN -->
+  <div id="login-screen">
+    <h1>Weapons Portal</h1>
+    <p class="subtitle">Secure Access Only</p>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button id="login-btn">Login</button>
+    <p id="error"></p>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dashboard" style="display:none;">
+    <header>
+      <h1 id="welcome"></h1>
+      <button id="logout-btn">Logout</button>
+    </header>
+
+    <main>
+      <h2>Available Items</h2>
+      <!-- JS will populate this container -->
+      <div id="items-grid" class="items-grid"></div>
+    </main>
+
+    <footer>
+      <small>© 2025 GTA Weapons RP</small>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
