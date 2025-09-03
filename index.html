@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agency Armory</title>
+  <title>GTA Weapons Portal</title>
   <link rel="stylesheet" href="styles.css">
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 </head>
@@ -25,6 +25,15 @@
       <h1 id="welcome"></h1>
       <button id="logout-btn">Logout</button>
     </header>
+<button id="order-history-btn">Order History</button>
+<div id="order-history" class="hidden">
+  <div class="order-history-content">
+    <span class="close-btn" id="close-history">&times;</span>
+    <h2>Your Order History</h2>
+    <div id="orders-list"></div>
+  </div>
+</div>
+
 
     <main>
       <h2>Available Items</h2>
@@ -33,7 +42,7 @@
     </main>
 
     <footer>
-      <small>We'll be watching.</small>
+      <small>© 2025 GTA Weapons RP</small>
     </footer>
   </div>
 

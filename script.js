@@ -63,8 +63,6 @@ async function loadDashboard() {
   const { data: items, error } = await supabaseClient.from('items').select('*');
   if (error) { console.error(error); return; }
 
-console.log("Items fetched from Supabase:", items.map(i => i.name));
-
   const itemsGrid = document.getElementById("items-grid");
   itemsGrid.innerHTML = ""; // <-- clears any existing cards
 
@@ -81,3 +79,69 @@ console.log("Items fetched from Supabase:", items.map(i => i.name));
     itemsGrid.appendChild(card);
   });
 }
+// --- ORDER HISTORY FUNCTIONALITY ---
+
+// UI references
+const orderHistoryBtn = document.getElementById("order-history-btn");
+const orderHistoryModal = document.getElementById("order-history");
+const closeHistory = document.getElementById("close-history");
+const ordersList = document.getElementById("orders-list");
+
+// Show order history (fetch from Supabase)
+orderHistoryBtn.addEventListener("click", async () => {
+  ordersList.innerHTML = "<p>Loading...</p>";
+
+  // Get logged-in user
+  const { data: { user } } = await supabaseClient.auth.getUser();
+  if (!user) {
+    ordersList.innerHTML = "<p>Error: User not logged in.</p>";
+    return;
+  }
+
+  // Fetch order history for this user
+  const { data: orders, error } = await supabaseClient
+    .from("orders")
+    .select("date, items, total_price")
+    .eq("user_id", user.id)
+    .order("date", { ascending: false });
+
+  ordersList.innerHTML = "";
+
+  if (error) {
+    console.error("Error fetching orders:", error);
+    ordersList.innerHTML = "<p>Failed to load order history.</p>";
+    return;
+  }
+
+  if (!orders || orders.length === 0) {
+    ordersList.innerHTML = "<p>No orders found.</p>";
+    return;
+  }
+
+  // Render each order
+  orders.forEach(order => {
+    const div = document.createElement("div");
+    div.className = "order-entry";
+    div.innerHTML = `
+      <p><strong>Date:</strong> ${new Date(order.date).toLocaleDateString()}</p>
+      <p><strong>Items:</strong> ${order.items}</p>
+      <p><strong>Total:</strong> ${order.total_price}</p>
+      <hr>
+    `;
+    ordersList.appendChild(div);
+  });
+
+  orderHistoryModal.style.display = "block";
+});
+
+// Close modal
+closeHistory.addEventListener("click", () => {
+  orderHistoryModal.style.display = "none";
+});
+
+// Close modal by clicking outside
+window.addEventListener("click", (event) => {
+  if (event.target === orderHistoryModal) {
+    orderHistoryModal.style.display = "none";
+  }
+});
