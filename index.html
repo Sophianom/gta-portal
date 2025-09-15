@@ -19,32 +19,54 @@
     <p id="error"></p>
   </div>
 
-  <!-- DASHBOARD -->
-  <div id="dashboard" style="display:none;">
-    <header>
-      <h1 id="welcome"></h1>
-      <button id="logout-btn">Logout</button>
-    </header>
-<button id="order-history-btn">Order History</button>
-<div id="order-history" class="hidden">
+<!-- DASHBOARD -->
+<div id="dashboard" style="display:none;">
+  <header>
+    <h1 id="welcome"></h1>
+    <button id="logout-btn" class="logout-btn">Logout</button>
+  </header>
+
+  <button id="order-history-btn">Order History</button>
+  <div id="order-history" class="hidden">
+    <div class="order-history-content">
+      <span class="close-btn" id="close-history">&times;</span>
+      <h2>Your Order History</h2>
+      <div id="orders-list"></div>
+    </div>
+  </div>
+
+  <main>
+    <h2>Available Items</h2>
+    <div id="items-grid" class="items-grid"></div>
+  </main>
+
+  <!-- ADMIN DASHBOARD (hidden unless is_admin=true) -->
+   <main>
+  <section id="admin-dashboard" style="display: none;">
+    <h2>Admin Panel</h2>
+    <div class="admin-items-grid" id="admin-items"></div>
+  
+    <h3>Current Orders</h3>
+<!-- Full list of actual past orders -->
+<div id="all-orders"></div>
+
+  </section>
+</main>
+  <footer>
+    <small>Rev stinks</small>
+  </footer>
+</div>
+
+<!-- Group Order History Modal -->
+<div id="group-history-modal" class="hidden">
   <div class="order-history-content">
-    <span class="close-btn" id="close-history">&times;</span>
-    <h2>Your Order History</h2>
-    <div id="orders-list"></div>
+    <span class="close-btn" id="close-group-history">&times;</span>
+    <h2 id="group-history-title">Order History</h2>
+    <div id="group-orders-list"></div>
   </div>
 </div>
 
 
-    <main>
-      <h2>Available Items</h2>
-      <!-- JS will populate this container -->
-      <div id="items-grid" class="items-grid"></div>
-    </main>
-
-    <footer>
-      <small>Rev stinks</small>
-    </footer>
-  </div>
 
   <script src="script.js"></script>
 </body>
