@@ -120,7 +120,7 @@ async function loadDashboard() {
   }
 
   // Load public items
-  const { data: items, error: itemsErr } = await supabaseClient.from("items").select("*");
+  const { data: items, error: itemsErr } = await supabaseClient.from("items").select("*").order("sort_order", { ascending: true });
   if (itemsErr) throw itemsErr;
 
   const itemsGrid = document.getElementById("items-grid");
